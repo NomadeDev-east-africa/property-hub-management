@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+/* ============================================================
+   PROPERTY HUB MANAGEMENT — Design System
+   Luxe immobilier · Djibouti · Or & Émeraude sur Onyx
+   ============================================================ */
+
+@theme {
+  /* Surfaces */
+  --color-onyx: #0a0a0b;
+  --color-ink: #111114;
+  --color-charcoal: #18181c;
+  --color-graphite: #222227;
+
+  /* Cream / light */
+  --color-cream: #f5f0e6;
+  --color-sand: #e9e0cf;
+  --color-stone: #a8a195;
+
+  /* Gold */
+  --color-gold: #c8a24a;
+  --color-gold-light: #e7cd8a;
+  --color-gold-deep: #9a7a2f;
+
+  /* Emerald (brand secondary) */
+  --color-emerald-deep: #0c3b2e;
+  --color-emerald: #145c45;
+  --color-emerald-light: #1f7d5f;
+
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+
+  --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --gold-gradient: linear-gradient(120deg, #9a7a2f 0%, #c8a24a 30%, #e7cd8a 50%, #c8a24a 70%, #9a7a2f 100%);
+}
+
+* {
+  border-color: color-mix(in srgb, var(--color-gold) 12%, transparent);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-onyx);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-onyx);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-onyx);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-gold-deep), var(--color-gold));
+  border-radius: 10px;
+  border: 2px solid var(--color-onyx);
+}
+
+/* ----------- Reusable utilities ----------- */
+
+.text-gold-gradient {
+  background: var(--gold-gradient);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.gold-line {
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+.glass {
+  background: color-mix(in srgb, var(--color-ink) 70%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+.card-glow {
+  box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.9);
+}
+
+.noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Reveal default state (JS adds .is-visible) */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 1s var(--ease-lux), transform 1s var(--ease-lux);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Shimmering gold button */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: var(--gold-gradient);
+  background-size: 200% auto;
+  color: var(--color-onyx);
+  transition: background-position 0.6s var(--ease-lux), transform 0.4s var(--ease-lux);
+}
+.btn-gold:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  border: 1px solid color-mix(in srgb, var(--color-gold) 45%, transparent);
+  color: var(--color-cream);
+  transition: all 0.4s var(--ease-lux);
+}
+.btn-ghost:hover {
+  border-color: var(--color-gold);
+  background: color-mix(in srgb, var(--color-gold) 10%, transparent);
+  transform: translateY(-2px);
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+@keyframes scroll-hint {
+  0% { transform: translateY(0); opacity: 0; }
+  40% { opacity: 1; }
+  80% { transform: translateY(14px); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { animation-duration: 0.001ms !important; }
+}
