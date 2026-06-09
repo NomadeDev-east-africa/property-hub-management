@@ -44,7 +44,7 @@ export default function Hero() {
 
       <motion.div
         style={{ opacity }}
-        className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5 sm:px-8"
+        className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5 pt-28 pb-20 sm:px-8 sm:pt-24"
       >
         <motion.div variants={container} initial="hidden" animate="show" className="max-w-3xl">
           <motion.div variants={item} className="mb-6 flex items-center gap-4">
