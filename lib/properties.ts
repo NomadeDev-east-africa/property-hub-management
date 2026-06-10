@@ -118,8 +118,8 @@ export const properties: Property[] = [
     gallery: [
       "/images/unfurnished-2.jpg",
       "/images/unfurnished-1.jpg",
-      "/images/empty-room-1.png",
-      "/images/empty-room-2.png",
+      "/images/empty-room-1.jpg",
+      "/images/empty-room-2.jpg",
     ],
     highlights: [
       { fr: "Grands volumes", en: "Large volumes" },
